@@ -1,0 +1,40 @@
+package org.codefarmer.wiremock;
+
+import org.junit.Before;
+import org.junit.ClassRule;
+import org.junit.Test;
+import com.github.tomakehurst.wiremock.junit.WireMockClassRule;
+
+import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
+import static com.github.tomakehurst.wiremock.client.WireMock.get;
+import static com.github.tomakehurst.wiremock.client.WireMock.stubFor;
+import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
+
+public class CLASSNAME
+{
+
+  @ClassRule
+  public static WireMockClassRule wireMockRule = new WireMockClassRule(0);
+
+  @Before
+  public void setUp() {
+    stubFor(get(urlEqualTo(getClass().getName()))
+        .willReturn(aResponse().withStatus(500)
+            .withHeader("Content-Type", "application/json")
+		    .withBody("{ \"message\": \"phooey\", \"severity\": 3}")));
+
+  }
+
+  @Test
+  public void testThing() {}
+
+  @Test
+  public void testOtherThing() {}
+
+  @Test
+  public void testYetAnotherThing() {}
+
+  @Test
+  public void testStilleOneOtherThing() {}
+
+}
